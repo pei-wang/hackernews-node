@@ -12,6 +12,7 @@ const Mutation = require("./resolvers/Mutation");
 const Subscription = require("./resolvers/Subscription");
 const User = require("./resolvers/User");
 const Link = require("./resolvers/Link");
+const Vote = require('./resolvers/Vote')
 const { createServer } = require("http");
 const { SubscriptionServer } = require("subscriptions-transport-ws");
 const { pubsub } = require("./pubsub");
@@ -22,6 +23,7 @@ const resolvers = {
   Subscription,
   User,
   Link,
+  Vote
 };
 
 const schema = makeExecutableSchema({
