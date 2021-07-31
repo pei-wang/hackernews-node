@@ -5,6 +5,7 @@ const { PrismaClient } = require("@prisma/client");
 const { getUserId } = require("./utils");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const express = require("express");
+var cors = require("cors");
 const { execute, subscribe } = require("graphql");
 
 const Query = require("./resolvers/Query");
@@ -12,7 +13,7 @@ const Mutation = require("./resolvers/Mutation");
 const Subscription = require("./resolvers/Subscription");
 const User = require("./resolvers/User");
 const Link = require("./resolvers/Link");
-const Vote = require('./resolvers/Vote')
+const Vote = require("./resolvers/Vote");
 const { createServer } = require("http");
 const { SubscriptionServer } = require("subscriptions-transport-ws");
 const { pubsub } = require("./pubsub");
@@ -23,7 +24,7 @@ const resolvers = {
   Subscription,
   User,
   Link,
-  Vote
+  Vote,
 };
 
 const schema = makeExecutableSchema({
@@ -35,6 +36,8 @@ const schema = makeExecutableSchema({
   const prisma = new PrismaClient();
   const PORT = 4000;
   const app = express();
+
+  app.use(cors());
   const httpServer = createServer(app);
 
   // graphql http server
